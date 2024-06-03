@@ -18,6 +18,7 @@ CREATE TABLE stations(
     owner_id INT NOT NULL,
     location_id INT NOT NULL,
     station_name TEXT,
+    description TEXT,
     FOREIGN KEY (owner_id) REFERENCES owners (id),
     FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE  
 );
