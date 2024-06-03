@@ -1,11 +1,15 @@
 * {
-    box-sizing: border-box;
-    border: 1px solid black;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+a {
+  text-decoration: none;
+  color: black;
 }
 
 h1,h2,h3,h4,h5 {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
@@ -18,16 +22,31 @@ h1,h2,h3,h4,h5 {
  * Always set the map height explicitly to define the size of the div element
  * that contains the map. 
  */
- #map {
-    height: 100%;
-  }
-  
-  /* 
-   * Optional: Makes the sample page fill the window. 
-   */
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+#map {
+  height: 100%;
+}
+
+/* Optional: Makes the sample page fill the window.  */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.left {
+  display: flex; 
+  flex-direction: column;
+}
+
+.left > * {
+  display: flex; 
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.left ul {
+  list-style-type: none;
+  padding: 0;
+}
