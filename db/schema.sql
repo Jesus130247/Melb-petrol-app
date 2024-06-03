@@ -5,7 +5,7 @@ CREATE TABLE owners(
     brand_name TEXT
 );
 
-CREATE TABLE location(
+CREATE TABLE locations(
     id SERIAL PRIMARY KEY,
     address TEXT,
     suburb TEXT,
@@ -19,10 +19,10 @@ CREATE TABLE stations(
     location_id INT NOT NULL,
     station_name TEXT,
     FOREIGN KEY (owner_id) REFERENCES owners (id),
-    FOREIGN KEY (location_id) REFERENCES location (id) ON DELETE CASCADE  
+    FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE CASCADE  
 );
 
 -- brand_img can be deleted if google provides
 --------------------------------------------EDIT UNDER HERE--------------------------------------------------------------
-
+ALTER TABLE stations ADD COLUMN description TEXT;
 
