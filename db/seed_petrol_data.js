@@ -17,13 +17,14 @@ for (let line of lines.slice(1,2)) {
     let brandName = sections[7]
     if (!brandNames.includes(brandName)) {
         brandNames.push(brandName)
-        let sql = `
+        let sqlOwner = `
         INSERT INTO owners
         (brand_name)
         VALUES ($1)
         RETURNING *;
         `
         let stationObj = {}
+        stationObj.owner_id = sections[0] //changed owner_id here -------------------------------
         stationObj.description = sections[2]
         stationObj.name = sections[5]
         stationObj.address = sections[9]
@@ -31,7 +32,7 @@ for (let line of lines.slice(1,2)) {
         stationObj.lat = sections[15]
         stationObj.lng = sections[16]
         console.log(stationObj);
-        db.query(sql, [brandName])
+        db.query(sqlOwner, [brandName])
         .then(res => {
             let sqlLocation = `
             INSERT INTO locations
@@ -41,9 +42,10 @@ for (let line of lines.slice(1,2)) {
             RETURNING *;
             `
             return db.query(sqlLocation, [stationObj.address, stationObj.suburb, stationObj.lat, stationObj.lng])
-        })
-        .then(res => {
-            stationObj.location_id = res.rows[0].id
+        }) //-----------------------------------------------ERROR---------------------OWNER UNDEFINED---------------------------------
+        .then(res => { //how is owner_id being defined up to or after this point?
+            stationObj.location_id = res.rows[0].id // .id --> .owner_id?
+            // stationObj.owner_id = res.rows[owner.id]
             let sqlStation = `
             INSERT INTO stations
             (owner_id, location_id, station_name, description)
@@ -51,7 +53,7 @@ for (let line of lines.slice(1,2)) {
             ($1, $2, $3, $4)
             `
             return db.query(sqlStation, [stationObj.owner_id, stationObj.location_id, stationObj.name, stationObj.description])
-        })
+        })//--------------------------------------------------------------------------------------------------------------------------
         .then(() => db.end())
     } else {
         let brandId = getBrandId(brandName)
