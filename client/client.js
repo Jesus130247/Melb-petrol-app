@@ -24,18 +24,36 @@ async function initMap() {
 
 async function mapMarkers(map) {
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-    fetch("/api/stations/locations")
+    fetch("/api/stations")
     .then(res => res.json())
     .then(res => {
-        for (let location of res) {
-            let position = { lat: location.lat, lng: location.lng}
-            let marker = new AdvancedMarkerElement({
-                map: map,
-                position: position,
-                title: location.address
-            });
-        }
-    })
+      for (let location of res) {
+        let position = { lat: location.lat, lng: location.lng}
+        let marker = new AdvancedMarkerElement({
+            map: map,
+            position: position,
+            title: location.address
+        });
+        let contentString = `
+          <h1 class="station_name"> ${location.station_name} </h1>
+          <p class="content"> ${location.address}, ${location.suburb} <br>
+          owner: ${location.brand_name} <br>
+          lat: ${location.lat} <br>
+          lng: ${location.lng} </p>
+          <div class="save">Save star</div>
+        `
+        const infowindow = new google.maps.InfoWindow({
+          content: contentString,
+          ariaLabel: location.suburb,
+          });
+        marker.addListener('click', () => {
+          infowindow.open({
+            anchor: marker,
+            map,
+          })
+        })
+      }
+  })
 }
 
 initMap();
