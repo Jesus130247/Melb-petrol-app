@@ -4,8 +4,6 @@ const clock = document.querySelector('.date')
 let clockDisplay = document.createElement('h2')
 
 setInterval(updateClock, 1000)
-
-
 clock.appendChild(clockDisplay)
 
 function currentTime(){
