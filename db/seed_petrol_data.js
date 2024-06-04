@@ -12,7 +12,7 @@ const data = fs.readFileSync('./db/stations.csv',
 // console.log(data);
 let lines = data.split('\n')
 let brandNames = []
-for (let line of lines.slice(1,2)) {
+for (let line of lines.slice(1,400)) {
     let sections = line.split(',')
     let brandName = sections[7]
     if (!brandNames.includes(brandName)) {
