@@ -23,4 +23,4 @@ router.get('/api/stations/random', (req, res) => {
         .then(randomStation => res.status(200).json(randomStation))
 })
 
-module.exports = router
+module.exports = router 
