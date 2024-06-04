@@ -18,14 +18,11 @@ router.get('/api/owners', (req,res) => {
         .then(owners => res.status(200).json(owners))
 })
 
-<<<<<<< HEAD
 router.get('/api/stations/random', (req, res) => {
     Station.findRandomStation()
         .then(randomStation => res.status(200).json(randomStation))
 })
 
-module.exports = router 
-=======
 router.get('/api/stats', (req,res) => {
     let statsObj = {}
     let p0 = Station.findStats()
@@ -66,5 +63,7 @@ router.get('/api/stats', (req,res) => {
         })
         .then(statsObj => res.status(200).json(statsObj))
 })
-module.exports = router
->>>>>>> feaad8f (stats info 2/2)
+
+module.exports = router 
+
+
