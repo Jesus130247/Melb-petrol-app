@@ -11,13 +11,19 @@ const data = fs.readFileSync('./db/stations.csv',
 // Display the file data
 // console.log(data);
 let lines = data.split('\n')
+<<<<<<< HEAD
 let brandNamesList = []
 
 async function doDatabase() {
+=======
+// let brandNamesList = []
+async function doSomething() {
+>>>>>>> 2c069e7 (failed code for seed)
     let sql1 = "delete from stations"
     let sql2 = "delete from locations"
     let sql3 = "delete from owners"
     let deleted = await db.query(sql1).then(() => db.query(sql2)).then(() => db.query(sql3))
+<<<<<<< HEAD
     let owners = await doOwners()
     let locations = await doLocations()
     let stations = await doStations()
@@ -27,12 +33,18 @@ async function doOwners() {
         let sections = line.split(',')
         let brandName = sections[7]
         let sql
+=======
+    for (let line of lines.slice(1,400)) {
+        let sections = line.split(',')
+        let brandName = sections[7]
+>>>>>>> 2c069e7 (failed code for seed)
         let sqlNewOwner = `
         INSERT INTO owners
         (brand_name)
         VALUES ($1)
         RETURNING *;
         `
+<<<<<<< HEAD
         let sqlExistingOwner = `
         SELECT * FROM owners
         WHERE brand_name = $1;
@@ -88,3 +100,70 @@ async function doStations() {
     }
 }
 doDatabase()
+=======
+        db.query(sqlNewOwner,[brandName])
+            .then(res => console.log(res.rows[0]))
+    }
+
+    for (let line of lines.slice(1)) {
+        let sections = line.split(',')
+        let brandName = sections[7]
+        let sql
+        // let sqlNewOwner = `
+        // INSERT INTO owners
+        // (brand_name)
+        // VALUES ($1)
+        // RETURNING *;
+        // `
+        
+        let sqlExistingOwner = `
+        SELECT * FROM owners
+        WHERE brand_name = ($1);
+        `
+        // if (!brandNamesList.includes(brandName)) {
+        //     brandNamesList.push(brandName)
+        //     sql = sqlNewOwner
+        // } else {
+        //     sql = sqlExistingOwner
+        // }
+        let stationObj = {}
+        stationObj.description = sections[2]
+        stationObj.name = sections[5]
+        stationObj.address = sections[9]
+        stationObj.suburb = sections[10]
+        stationObj.lat = sections[15]
+        stationObj.lng = sections[16]
+        db.query(sqlExistingOwner, [brandName])
+        .then(res => {
+            stationObj.owner_id = res.rows[0].id
+            let sqlLocation = `
+            INSERT INTO locations
+            (address, suburb, lat, lng)
+            VALUES
+            ($1, $2, $3, $4)
+            RETURNING *;
+            `
+            return db.query(sqlLocation, [stationObj.address, stationObj.suburb, stationObj.lat, stationObj.lng])
+        })
+        .then(res => {
+            stationObj.location_id = res.rows[0].id
+            let sqlStation = `
+            INSERT INTO stations
+            (owner_id, location_id, station_name, description)
+            VALUES
+            ($1, $2, $3, $4)
+            `
+            return db.query(sqlStation, [stationObj.owner_id, stationObj.location_id, stationObj.name, stationObj.description])
+        })
+        .catch(err => console.log(err))
+
+
+    }
+
+
+    
+
+}
+
+doSomething()
+>>>>>>> 2c069e7 (failed code for seed)
