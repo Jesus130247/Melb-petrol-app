@@ -7,8 +7,17 @@ function findAllOwners() {
         .then(result => result.rows)
 }
 
+function findCountOwners() {
+    let sql = `
+    SELECT count(*) FROM owners;
+    `
+    return db.query(sql)
+        .then(result => result.rows[0])
+}
+
 const Owner = {
-    findAllOwners
+    findAllOwners,
+    findCountOwners
 }
 
 module.exports = Owner

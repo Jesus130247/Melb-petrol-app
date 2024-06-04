@@ -7,7 +7,7 @@ setInterval(updateClock, 1000)
 clock.appendChild(clockDisplay)
 
 function currentTime(){
-    return dayjs().format('ddd HH:MM:ss A')
+    return dayjs().format('ddd HH:mm:ss A')//maybe its the issue
 }
 
 
