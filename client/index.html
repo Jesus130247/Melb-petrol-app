@@ -7,15 +7,25 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <link rel="stylesheet" href="style.css">
+    <script type="module" src="/clock.js"></script>
     <script type="module" src="/client.js"></script>
     <script type="module" src="/near_stations_list.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 </head>
 <body>
     
     <div class="container">
         <aside class="left">
             <div class="spotlight">spotlight</div>
-            <div class="stats">stats</div>
+            <div class="stats">
+                <h1>stats</h1>
+                <h2>total station: 5244</h2>
+                <h2>total owners: 32</h2>
+                <p>Caltex 1502</p>
+                <p>BP 1230</p>
+                <p>SHELL 839</p>
+
+            </div>
             <div class="postcode">postcode</div>
             <div class="about">
                 <p>TEAM JESUS</p>
@@ -43,6 +53,7 @@
             <div id="map"></div>
         </main>
         <aside class="right">
+
             <section class="date"></section>
             <div class="center-location">
                 <h3>Map center location</h3>
