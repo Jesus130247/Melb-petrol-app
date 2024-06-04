@@ -1,6 +1,6 @@
 const db = require('../db')
 
-function findAll() {
+function findAllOwners() {
     let sql = ` SELECT * FROM owners `
     
     return db.query(sql)
@@ -8,7 +8,7 @@ function findAll() {
 }
 
 const Owner = {
-    findAll
+    findAllOwners
 }
 
 module.exports = Owner
