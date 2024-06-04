@@ -1,9 +1,12 @@
+const centerCoords = document.querySelector('.center-coords')
+
 // Initialize and add the map
 let map;
 
 async function initMap() {
   // The location of Uluru
   const position = { lat: -37.8136, lng: 144.9631 };
+  centerCoords.innerHTML = `lat: ${position.lat} <br />lng: ${position.lng}`
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
@@ -19,7 +22,13 @@ async function initMap() {
 
   // The markers for petrol stations
   mapMarkers(map);
-  
+
+  // On Drag End
+    google.maps.event.addListener(map, 'dragend', function() { 
+        let coord = `lat: ${map.getCenter().toJSON().lat.toFixed(4)} <br />
+            lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
+        centerCoords.innerHTML = coord
+    });
 }
 
 async function mapMarkers(map) {
@@ -57,3 +66,4 @@ async function mapMarkers(map) {
 }
 
 initMap();
+
