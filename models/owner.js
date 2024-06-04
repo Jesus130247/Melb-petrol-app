@@ -1,15 +1,14 @@
 const db = require('../db')
 
 function findAll() {
-    let sql = ` SELECT * FROM stations 
-    LIMIT 400;
-    `
+    let sql = ` SELECT * FROM owners `
+    
     return db.query(sql)
         .then(result => result.rows)
 }
 
-const Station = {
+const Owner = {
     findAll
 }
 
-module.exports = Station
+module.exports = Owner
