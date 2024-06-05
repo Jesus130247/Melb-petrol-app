@@ -34,6 +34,14 @@ navigator.geolocation.getCurrentPosition((position) => {
 
 async function mapMarkers(map) {
 
+  // delete all markers
+  let img = document.querySelectorAll('.station_marker')
+  for (let elem of img) {
+    let elemParent = elem.parentElement
+    elemParent.remove()
+  }
+  // 
+
   let topLeft = [map.getBounds().Xh.hi,map.getBounds().Hh.lo]
   let bottomRight = [map.getBounds().Xh.lo,map.getBounds().Hh.hi]
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -41,9 +49,9 @@ async function mapMarkers(map) {
   fetch(`/api/stations/bounds/${topLeft[0]}/${topLeft[1]}/${bottomRight[0]}/${bottomRight[1]}`)
     .then(res => res.json())
     .then(res => {
-      console.log('123124124',res)
       for (let location of res) {
         let iconImg = document.createElement('img')
+        iconImg.classList.add('station_marker')
         iconImg.src = findIconUrl(location.brand_name)
         iconImg.style.width = '40px'
         let position = { lat: location.lat, lng: location.lng}

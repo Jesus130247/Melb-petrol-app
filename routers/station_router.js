@@ -48,7 +48,6 @@ router.get('/api/stats', (req,res) => {
 router.get('/api/stations/bounds/:topLeft_0/:topLeft_1/:bottomRight_0/:bottomRight_1', (req, res) => {
     let topLeft = [ req.params.topLeft_0, req.params.topLeft_1]
     let bottomRight = [ req.params.bottomRight_0, req.params.bottomRight_1]
-    console.log(topLeft, bottomRight)
     Station.findBoundStationList(topLeft, bottomRight)
         .then(stationList => res.status(200).json(stationList))
         .catch(err => res.status(400).json(err))
