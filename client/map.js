@@ -2,6 +2,7 @@ const centerCoords = document.querySelector('.center-coords')
 
 // Initialize and add the map
 let map;
+let markersArray = []
 
 async function initMap(lat, lng) {
   const position = { lat, lng };
@@ -24,6 +25,10 @@ async function initMap(lat, lng) {
         centerCoords.innerHTML = coord
     });
 
+    // initial call to get petrol stations of default bounds
+    // mapMarkers(map)
+    // event listeners for when the map changes
+    // google.maps.event.addListener(map, 'zoomstart', () => mapMarkers(map))
     google.maps.event.addListener(map, 'dragend', () => mapMarkers(map))
     
 }
@@ -35,10 +40,8 @@ navigator.geolocation.getCurrentPosition((position) => {
 async function mapMarkers(map) {
 
   // delete all markers
-  let img = document.querySelectorAll('.station_marker')
-  for (let elem of img) {
-    let elemParent = elem.parentElement
-    elemParent.remove()
+  for (let marker of markersArray) {
+    marker.map = null
   }
   // 
 
@@ -63,6 +66,7 @@ async function mapMarkers(map) {
             title: location.station_name,
             content: iconImg,
         });
+        markersArray.push(marker)
         let contentString = `
           <h1 class="station_name"> ${location.station_name} </h1>
           <p class="content"> ${location.address}, ${location.suburb} <br>
