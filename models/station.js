@@ -74,12 +74,32 @@ function findBoundStationList(topLeft, bottomRight) {
         .then(result => result.rows)
 }
 
+function findStationsAroundPosition(position) {
+    console.log('positon',position)
+    let start = [Number(position.lat)-0.09, Number(position.lng)-0.08]
+    let end = [Number(position.lat)+0.09, Number(position.lng)+0.08]
+    console.log('startend',start,end)
+    let sql = `
+    SELECT * FROM stations
+    JOIN owners
+    ON stations.owner_id = owners.id
+    JOIN locations
+    ON stations.location_id = locations.id
+    WHERE lat BETWEEN $1 AND $2
+    AND lng BETWEEN $3 AND $4
+    LIMIT 700;
+    `
+    return db.query(sql, [start[0], end[0], start[1], end[1]])
+        .then(result => result.rows)
+}
+
 const Station = {
     findAllStations,
     findAllLocations,
     findStats,
     findCountStations,
     findRandomStation,
+    findStationsAroundPosition,
     findBoundStationList
 }
 
