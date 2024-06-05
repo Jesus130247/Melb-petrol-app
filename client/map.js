@@ -1,9 +1,25 @@
 import findIconUrl from './utils.js'
-
 const centerCoords = document.querySelector('.center-coords')
 const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 const lookupBtn = document.querySelector('.lookup-address-btn')
 const centerLocationDiv = document.querySelector('.center-location')
+
+// spotlight code
+import { getSpotlight } from './spotlight.js';
+const spotlightStation = document.querySelector('.randomStation')
+const refreshLink = document.querySelector('.refresh')
+
+refreshLink.addEventListener('click', async () => {
+    spotlightData = await getSpotlight()
+    spotlightLat = spotlightData.lat
+    spotlightLng = spotlightData.lng
+})
+
+// data for map coords
+let spotlightData
+let spotlightLat
+let spotlightLng
+
 // Initialize and add the map
 let map;
 let markersArray = []
@@ -22,13 +38,19 @@ async function initMap(lat, lng) {
     mapId: "AUSTRALIA",
   });
 
+  // initial spotlight call
+  spotlightData = await getSpotlight()
+  spotlightLat = spotlightData.lat
+  spotlightLng = spotlightData.lng
+  spotlightStation.addEventListener('click', () => goToStation(map,spotlightLat,spotlightLng))
+  
   // On Drag End
     google.maps.event.addListener(map, 'dragend', function() { 
         let coord = `lat: ${map.getCenter().toJSON().lat.toFixed(4)} <br />
             lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
         centerCoords.innerHTML = coord
         let addressText = document.querySelector('.center-address')
-        if (!addressText) {
+        if (addressText !== null) {
           addressText.remove()
         }
     });
@@ -111,10 +133,6 @@ async function mapMarkers(map) {
   })
 }
 
-
-
-
-
 function getMapMarkersAroundPosition(map, position) {
   fetch(`/api/stations/nearest/${position.lat}/${position.lng}`)
   .then(res => res.json())
@@ -153,4 +171,54 @@ function getMapMarkersAroundPosition(map, position) {
       })
     }
 })
+}
+
+function goToStation(map,lat,lng) {
+    map.setCenter(new google.maps.LatLng(lat,lng))
+    let coord = `lat: ${map.getCenter().toJSON().lat.toFixed(4)} <br />
+    lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
+    centerCoords.innerHTML = coord
+    singleMapMarker(spotlightData)
+}
+
+async function singleMapMarker(location) {
+    let iconImg = document.createElement('img')
+    iconImg.classList.add('station_marker')
+    iconImg.src = findIconUrl(location.brand_name)
+    iconImg.style.width = '40px'
+    let position = { lat: location.lat, lng: location.lng}
+    let marker = new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: location.station_name,
+        content: iconImg,
+    });
+
+    markersArray.push(marker)
+
+    let contentString = `
+      <h1 class="station_name"> ${location.station_name} </h1>
+      <p class="content"> ${location.address}, ${location.suburb} <br>
+      owner: ${location.brand_name} <br>
+      lat: ${location.lat} <br>
+      lng: ${location.lng} </p>
+      <div class="save">Save star</div>
+    `
+
+    const infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      ariaLabel: location.suburb,
+      });
+
+    marker.addListener('click', () => {
+      infowindow.open({
+        anchor: marker,
+        map,
+      })
+    })
+
+    infowindow.open({
+        anchor: marker,
+        map,
+    })
 }
