@@ -17,15 +17,15 @@ async function initMap(lat, lng) {
     mapId: "AUSTRALIA",
   });
 
-  // The markers for petrol stations
-  mapMarkers(map);
-
   // On Drag End
     google.maps.event.addListener(map, 'dragend', function() { 
         let coord = `lat: ${map.getCenter().toJSON().lat.toFixed(4)} <br />
             lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
         centerCoords.innerHTML = coord
     });
+
+    google.maps.event.addListener(map, 'dragend', () => mapMarkers(map))
+    
 }
 
 navigator.geolocation.getCurrentPosition((position) => {
@@ -33,10 +33,15 @@ navigator.geolocation.getCurrentPosition((position) => {
 });
 
 async function mapMarkers(map) {
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-    fetch("/api/stations")
+
+  let topLeft = [map.getBounds().Xh.hi,map.getBounds().Hh.lo]
+  let bottomRight = [map.getBounds().Xh.lo,map.getBounds().Hh.hi]
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+  fetch(`/api/stations/bounds/${topLeft[0]}/${topLeft[1]}/${bottomRight[0]}/${bottomRight[1]}`)
     .then(res => res.json())
     .then(res => {
+      console.log('123124124',res)
       for (let location of res) {
         let iconImg = document.createElement('img')
         iconImg.src = findIconUrl(location.brand_name)
@@ -85,6 +90,3 @@ function findIconUrl(brand) {
     return icons.default
   }
 }
-
-initMap();
-

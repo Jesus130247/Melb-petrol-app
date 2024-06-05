@@ -58,12 +58,25 @@ function findCountStations() {
     .then(result => result.rows[0])
 }
 
+function findBoundStationList(topLeft, bottomRight) {
+    let [ topLat, topLng ] = topLeft
+    let [ bottomLat, bottomLng ] = bottomRight
+    let sql = `
+    SELECT * FROM locations
+    LIMIT 3;
+    `
+    return db.query(sql)
+        .then(result => result.rows)
+        .then(res => console.log(res))
+}
+
 const Station = {
     findAllStations,
     findAllLocations,
     findStats,
     findCountStations,
-    findRandomStation
+    findRandomStation,
+    findBoundStationList
 }
 
 module.exports = Station
