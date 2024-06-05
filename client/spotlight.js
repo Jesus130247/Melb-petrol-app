@@ -1,6 +1,4 @@
 const spotlightStation = document.querySelector('.randomStation')
-const refreshLink = document.querySelector('.refresh')
-refreshLink.addEventListener('click', getSpotlight)
 
 export async function getSpotlight() {
     const result = await fetch('/api/stations/random')
@@ -11,5 +9,6 @@ export async function getSpotlight() {
     return data
 }
 
-getSpotlight()
+
+
     
