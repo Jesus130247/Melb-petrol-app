@@ -12,12 +12,10 @@ function displayAsides(event) {
             leftDiv.style.display = 'none'
             rightDiv.style.display = 'none'
             mapId.style.position = 'absolute'
-            console.log('asides display = ', leftDiv.style.display, '&', rightDiv.style.display);
         } else {
             leftDiv.style.display = ''
             rightDiv.style.display = ''
             mapId.style.position = ''
-            console.log('asides display reset');
         }
 
     }

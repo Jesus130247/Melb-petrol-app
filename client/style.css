@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  border: 1px solid black;
 }
 a {
   text-decoration: none;
@@ -37,6 +36,21 @@ body {
 }
 
 .left > * {
+  border: 2px solid black;
+  display: flex; 
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 10px 0px;
+}
+.left * > * {
+  padding: 5px 0px
+}
+
+.right * > * {
+  padding: 5px 0px
+}
+.right > * {
+  border: 2px solid black;
   display: flex; 
   flex-direction: column;
   flex-grow: 1;
@@ -46,16 +60,90 @@ body {
   list-style-type: none;
   padding: 0;
 }
-
+.left p {
+  border-top: 1px solid black;
+  list-style-type: none;
+  padding: 0px 5px;
+  display: flex;
+  justify-content: space-between; 
+}
+.right ul {
+  list-style-type: none;
+  padding: 0;
+}
+.right-list-owner {
+  border-top: 1px solid black;
+  list-style-type: none;
+  padding: 5px 0px;
+}
 
 ul img {
   width: 15px;
   border-radius: 10px;
 }
-/* this needs to be changed. it is used for test of styling team memebr img*/
 
 .date_temperature {
   cursor: pointer;
+  background-color: linen;  
+}
+
+.stats {
+  background-color: linen; 
+  display: flex;
+}
+/* .stats > * {
+  justify-content: space-between; 
+} */
+
+.about{
+  background-color: linen;  
+}
+.near-stations-list{
+  background-color: linen;  
+}
+.spotlight{
+  background-color: #fef1f5;
+}
+
+.postcode {
+  background-color: #fef1f5 ;
+}
+.postcode li {
+  padding: 5px 5px;
+  border: 1px solid gray;
+  background-color: floralwhite;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.refresh {
+  color:rgb(35, 95, 224);
+  cursor: pointer;
+}
+/* #leo {
+  background-image: url(https://avatars.githubusercontent.com/u/150982381?v=4);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#ting {
+  background-image: url(https://avatars.githubusercontent.com/u/117793395?s=96&v=4);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}
+#jf {
+  background-image: url(https://avatars.githubusercontent.com/u/76943891?v=4);
+  background-size: cover;
+  background-repeat: no-repeat;
 
 }
 
+#alex {
+  background-image: url(https://avatars.githubusercontent.com/u/164013420?v=4);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+} */
