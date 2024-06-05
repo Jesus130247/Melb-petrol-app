@@ -68,10 +68,8 @@ async function mapMarkers(map) {
         })
       }
   })
-<<<<<<< HEAD
 }
-=======
-}
+
 
 function findIconUrl(brand) {
   let icons  = {
@@ -90,4 +88,3 @@ function findIconUrl(brand) {
 
 initMap();
 
->>>>>>> a369752 (add icon img for markers)
