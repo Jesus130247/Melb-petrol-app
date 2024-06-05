@@ -1,3 +1,5 @@
+import findIconUrl from './utils.js'
+
 const centerCoords = document.querySelector('.center-coords')
 const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 const lookupBtn = document.querySelector('.lookup-address-btn')
@@ -26,7 +28,9 @@ async function initMap(lat, lng) {
             lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
         centerCoords.innerHTML = coord
         let addressText = document.querySelector('.center-address')
-        addressText.remove()
+        if (!addressText) {
+          addressText.remove()
+        }
     });
       
       lookupBtn.addEventListener('click', () => {
@@ -108,20 +112,7 @@ async function mapMarkers(map) {
 }
 
 
-function findIconUrl(brand) {
-  let icons  = {
-    "Caltex": "https://fuelprice.io/wp-content/uploads/2018/07/caltex-favicon-64x64.png",
-    "BP": "https://fuelprice.io/wp-content/uploads/2018/07/bp-favicon.png",
-    "Shell": "https://fuelprice.io/wp-content/uploads/2018/07/shell-favicon.png",
-    "7-Eleven": "https://fuelprice.io/wp-content/uploads/2018/07/7-eleven-64x62.png",
-    "default": "https://fuelprice.io/wp-content/uploads/2018/10/fuelprice-logo.png"
-  }
-  if (icons[brand]) {
-    return icons[brand]
-  } else {
-    return icons.default
-  }
-}
+
 
 
 function getMapMarkersAroundPosition(map, position) {
