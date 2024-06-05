@@ -1,4 +1,6 @@
 import findIconUrl from './utils.js'
+import getNearbyStations from './searchLocation.js'
+
 const centerCoords = document.querySelector('.center-coords')
 const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 const lookupBtn = document.querySelector('.lookup-address-btn')
@@ -20,6 +22,7 @@ let spotlightData
 let spotlightLat
 let spotlightLng
 
+const form = document.querySelector('.search_location')
 // Initialize and add the map
 let map;
 let markersArray = []
@@ -72,7 +75,8 @@ async function initMap(lat, lng) {
     getMapMarkersAroundPosition(map, position)
     // event listeners for when the map changes by drag
     google.maps.event.addListener(map, 'dragend', () => mapMarkers(map))
-    
+    // event listner
+    form.addEventListener('submit', getNearbyStations)
 }
 
 navigator.geolocation.getCurrentPosition((position) => {
@@ -170,20 +174,4 @@ async function mapMarkers(map) {
       }
   })
 }
-
-function findIconUrl(brand) {
-  let icons  = {
-    "Caltex": "https://fuelprice.io/wp-content/uploads/2018/07/caltex-favicon-64x64.png",
-    "BP": "https://fuelprice.io/wp-content/uploads/2018/07/bp-favicon.png",
-    "Shell": "https://fuelprice.io/wp-content/uploads/2018/07/shell-favicon.png",
-    "7-Eleven": "https://fuelprice.io/wp-content/uploads/2018/07/7-eleven-64x62.png",
-    "default": "https://fuelprice.io/wp-content/uploads/2018/10/fuelprice-logo.png"
-  }
-  if (icons[brand]) {
-    return icons[brand]
-  } else {
-    return icons.default
-  }
-}
-
 
