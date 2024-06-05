@@ -9,9 +9,15 @@ async function getSpotlight() {
         let address = data.address
         
         spotlightStation.innerHTML = `${name} <br /> ${address}`
-        console.log(name, address);
+        spotlightStation.addEventListener('click', goToStation)
     })   
 }
+
+function moveMap(map) {
+    
+}
+
 getSpotlight()
 refreshLink.addEventListener('click', getSpotlight)
+
     
