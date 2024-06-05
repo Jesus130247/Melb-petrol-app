@@ -1,17 +1,12 @@
 const spotlightStation = document.querySelector('.randomStation')
-const refreshLink = document.querySelector('.refresh')
 
-async function getSpotlight() {
-    fetch('/api/stations/random')
-    .then(res => res.json())
-    .then(data => {
-        let name = data.station_name
-        let address = data.address
-        
-        spotlightStation.innerHTML = `${name} <br /> ${address}`
-        console.log(name, address);
-    })   
+export async function getSpotlight() {
+    const result = await fetch('/api/stations/random')
+    const data = await result.json()
+    let name = data.station_name
+    let address = data.address
+    spotlightStation.innerHTML = `${name} <br /> ${address}`
+    return data
 }
-getSpotlight()
-refreshLink.addEventListener('click', getSpotlight)
+
     
