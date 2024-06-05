@@ -3,12 +3,9 @@ const centerCoords = document.querySelector('.center-coords')
 // Initialize and add the map
 let map;
 
-async function initMap() {
-  // The location of Uluru
-  const position = { lat: -37.8136, lng: 144.9631 };
+async function initMap(lat, lng) {
+  const position = { lat, lng };
   centerCoords.innerHTML = `lat: ${position.lat} <br />lng: ${position.lng}`
-  // Request needed libraries.
-  //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
 
   // The map
@@ -30,6 +27,10 @@ async function initMap() {
         centerCoords.innerHTML = coord
     });
 }
+
+navigator.geolocation.getCurrentPosition((position) => {
+  initMap(position.coords.latitude, position.coords.longitude);
+});
 
 async function mapMarkers(map) {
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -64,6 +65,3 @@ async function mapMarkers(map) {
       }
   })
 }
-
-initMap();
-
