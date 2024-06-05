@@ -26,29 +26,10 @@ router.get('/api/stations/random', (req, res) => {
 router.get('/api/stats', (req,res) => {
     let statsObj = {}
     let p0 = Station.findStats()
-    // .then(stats => {
-    //     let newStats = []
-    //     for (let stat of stats) {
-    //             if (Number(stat.count) > 1) {
-    //                 newStats.push(stat)
-    //             }
-    //         }
-        // statsObj.owners = newStats
         let p1 = Owner.findCountOwners()
-            // .then(count => {
-            //     statsObj.total_owners = count
-
-            // })
         let p2 = Station.findCountStations()
-        // .then(count => {
-        //     statsObj.total_stations = count
-
-        // })
     Promise.all([p0,p1,p2])
         .then(([stats, ownerCount, stationCount]) => {
-            // console.log(stats);
-            // console.log(ownerCount);
-            // console.log(stationCount);
             let filteredStats = []
             for (let stat of stats) {
                     if (Number(stat.count) > 1) {
@@ -62,6 +43,15 @@ router.get('/api/stats', (req,res) => {
             return statsObj
         })
         .then(statsObj => res.status(200).json(statsObj))
+})
+
+router.get('/api/stations/bounds/:topLeft_0/:topLeft_1/:bottomRight_0/:bottomRight_1', (req, res) => {
+    let topLeft = [ req.params.topLeft_0, req.params.topLeft_1]
+    let bottomRight = [ req.params.bottomRight_0, req.params.bottomRight_1]
+    console.log(topLeft, bottomRight)
+    Station.findBoundStationList(topLeft, bottomRight)
+        .then(stationList => res.status(200).json(stationList))
+        .catch(err => res.status(400).json(err))
 })
 
 module.exports = router 
