@@ -30,4 +30,3 @@ fetch('/api/stations')
             rightList.appendChild(stationLi)
         }
     })
-

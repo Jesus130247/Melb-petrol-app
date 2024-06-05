@@ -74,7 +74,7 @@ function findBoundStationList(topLeft, bottomRight) {
         .then(result => result.rows)
 }
 
-function findStationsAroundPosition(position, radius=0.08) {
+function findStationsAroundPosition(position, radius=0.1) {
     console.log('positon',position)
     console.log(radius)
     let start = [Number(position.lat)-radius, Number(position.lng)-radius]

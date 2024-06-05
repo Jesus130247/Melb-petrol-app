@@ -1,6 +1,4 @@
 import findIconUrl from './utils.js'
-import getNearbyStations from './searchLocation.js'
-
 const centerCoords = document.querySelector('.center-coords')
 const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 const lookupBtn = document.querySelector('.lookup-address-btn')
@@ -22,7 +20,6 @@ let spotlightData
 let spotlightLat
 let spotlightLng
 
-const form = document.querySelector('.search_location')
 // Initialize and add the map
 let map;
 let markersArray = []
@@ -73,58 +70,19 @@ async function initMap(lat, lng) {
       })
     // initial call to get petrol stations of default bounds
     getMapMarkersAroundPosition(map, position)
-    // event listeners for when the map changes by drag
+    // event listeners for when the map changes
+    google.maps.event.addListener(map, 'zoomstart', () => mapMarkers(map))
     google.maps.event.addListener(map, 'dragend', () => mapMarkers(map))
-    // event listner
-    form.addEventListener('submit', getNearbyStations)
+    
 }
 
 navigator.geolocation.getCurrentPosition((position) => {
   var lat = position.coords.latitude;
   var lng = position.coords.longitude;
   initMap(lat, lng);
+
+  
 });
-
-
-function getMapMarkersAroundPosition(map, position) {
-  fetch(`/api/stations/nearest/${position.lat}/${position.lng}`)
-  .then(res => res.json())
-  .then(res => {
-    console.log('around',res)
-    for (let location of res) {
-      let iconImg = document.createElement('img')
-      iconImg.classList.add('station_marker')
-      iconImg.src = findIconUrl(location.brand_name)
-      iconImg.style.width = '40px'
-      let position = { lat: location.lat, lng: location.lng}
-      let marker = new AdvancedMarkerElement({
-          map: map,
-          position: position,
-          title: location.station_name,
-          content: iconImg,
-      });
-      markersArray.push(marker)
-      let contentString = `
-        <h1 class="station_name"> ${location.station_name} </h1>
-        <p class="content"> ${location.address}, ${location.suburb} <br>
-        owner: ${location.brand_name} <br>
-        lat: ${location.lat} <br>
-        lng: ${location.lng} </p>
-        <div class="save">Save star</div>
-      `
-      const infowindow = new google.maps.InfoWindow({
-        content: contentString,
-        ariaLabel: location.suburb,
-        });
-      marker.addListener('click', () => {
-        infowindow.open({
-          anchor: marker,
-          map,
-        })
-      })
-    }
-})
-}
 
 async function mapMarkers(map) {
   // delete all markers
@@ -175,3 +133,93 @@ async function mapMarkers(map) {
   })
 }
 
+function getMapMarkersAroundPosition(map, position) {
+  fetch(`/api/stations/nearest/${position.lat}/${position.lng}`)
+  .then(res => res.json())
+  .then(res => {
+    console.log('around',res)
+    for (let location of res) {
+      let iconImg = document.createElement('img')
+      iconImg.classList.add('station_marker')
+      iconImg.src = findIconUrl(location.brand_name)
+      iconImg.style.width = '40px'
+      let position = { lat: location.lat, lng: location.lng}
+      let marker = new AdvancedMarkerElement({
+          map: map,
+          position: position,
+          title: location.station_name,
+          content: iconImg,
+      });
+      markersArray.push(marker)
+      let contentString = `
+        <h1 class="station_name"> ${location.station_name} </h1>
+        <p class="content"> ${location.address}, ${location.suburb} <br>
+        owner: ${location.brand_name} <br>
+        lat: ${location.lat} <br>
+        lng: ${location.lng} </p>
+        <div class="save">Save star</div>
+      `
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        ariaLabel: location.suburb,
+        });
+      marker.addListener('click', () => {
+        infowindow.open({
+          anchor: marker,
+          map,
+        })
+      })
+    }
+})
+}
+
+function goToStation(map,lat,lng) {
+    map.setCenter(new google.maps.LatLng(lat,lng))
+    let coord = `lat: ${map.getCenter().toJSON().lat.toFixed(4)} <br />
+    lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
+    centerCoords.innerHTML = coord
+    singleMapMarker(spotlightData)
+    getMapMarkersAroundPosition(map, {lat: map.getCenter().toJSON().lat,lng:map.getCenter().toJSON().lng})
+}
+
+async function singleMapMarker(location) {
+    let iconImg = document.createElement('img')
+    iconImg.classList.add('station_marker')
+    iconImg.src = findIconUrl(location.brand_name)
+    iconImg.style.width = '40px'
+    let position = { lat: location.lat, lng: location.lng}
+    let marker = new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: location.station_name,
+        content: iconImg,
+    });
+
+    markersArray.push(marker)
+
+    let contentString = `
+      <h1 class="station_name"> ${location.station_name} </h1>
+      <p class="content"> ${location.address}, ${location.suburb} <br>
+      owner: ${location.brand_name} <br>
+      lat: ${location.lat} <br>
+      lng: ${location.lng} </p>
+      <div class="save">Save star</div>
+    `
+
+    const infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      ariaLabel: location.suburb,
+      });
+
+    marker.addListener('click', () => {
+      infowindow.open({
+        anchor: marker,
+        map,
+      })
+    })
+
+    infowindow.open({
+        anchor: marker,
+        map,
+    })
+}
