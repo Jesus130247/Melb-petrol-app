@@ -45,9 +45,11 @@ async function mapMarkers(map) {
   let topLeft = [map.getBounds().Xh.hi,map.getBounds().Hh.lo]
   let bottomRight = [map.getBounds().Xh.lo,map.getBounds().Hh.hi]
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
+  console.log(`${topLeft[0]}/${topLeft[1]}/${bottomRight[0]}/${bottomRight[1]}`);
   fetch(`/api/stations/bounds/${topLeft[0]}/${topLeft[1]}/${bottomRight[0]}/${bottomRight[1]}`)
-    .then(res => res.json())
+    .then(res => {
+      console.log('what is this res',res);
+      return res.json()})
     .then(res => {
       for (let location of res) {
         let iconImg = document.createElement('img')
