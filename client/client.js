@@ -38,11 +38,15 @@ async function mapMarkers(map) {
     .then(res => res.json())
     .then(res => {
       for (let location of res) {
+        let iconImg = document.createElement('img')
+        iconImg.src = findIconUrl(location.brand_name)
+        iconImg.style.width = '40px'
         let position = { lat: location.lat, lng: location.lng}
         let marker = new AdvancedMarkerElement({
             map: map,
             position: position,
-            title: location.address
+            title: location.station_name,
+            content: iconImg,
         });
         let contentString = `
           <h1 class="station_name"> ${location.station_name} </h1>
@@ -64,4 +68,26 @@ async function mapMarkers(map) {
         })
       }
   })
+<<<<<<< HEAD
 }
+=======
+}
+
+function findIconUrl(brand) {
+  let icons  = {
+    "Caltex": "https://fuelprice.io/wp-content/uploads/2018/07/caltex-favicon-64x64.png",
+    "BP": "https://fuelprice.io/wp-content/uploads/2018/07/bp-favicon.png",
+    "Shell": "https://fuelprice.io/wp-content/uploads/2018/07/shell-favicon.png",
+    "7-Eleven": "https://fuelprice.io/wp-content/uploads/2018/07/7-eleven-64x62.png",
+    "default": "https://fuelprice.io/wp-content/uploads/2018/10/fuelprice-logo.png"
+  }
+  if (icons[brand]) {
+    return icons[brand]
+  } else {
+    return icons.default
+  }
+}
+
+initMap();
+
+>>>>>>> a369752 (add icon img for markers)
