@@ -1,5 +1,8 @@
 const centerCoords = document.querySelector('.center-coords')
 const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+const lookupBtn = document.querySelector('.lookup-address-btn')
+const centerLocationDiv = document.querySelector('.center-location')
+// Initialize and add the map
 let map;
 let markersArray = []
 
@@ -22,8 +25,23 @@ async function initMap(lat, lng) {
         let coord = `lat: ${map.getCenter().toJSON().lat.toFixed(4)} <br />
             lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
         centerCoords.innerHTML = coord
+        let addressText = document.querySelector('.center-address')
+        addressText.remove()
     });
-
+      
+      lookupBtn.addEventListener('click', () => {
+        var google_map_position = new google.maps.LatLng( map.getCenter().toJSON().lat.toFixed(4), map.getCenter().toJSON().lng.toFixed(4) );
+        var google_maps_geocoder = new google.maps.Geocoder();
+        google_maps_geocoder.geocode(
+            { 'latLng': google_map_position }, ( results, status ) => {
+                let address = results[0].formatted_address
+                let addressP = document.createElement('p')
+                addressP.className = 'center-address'
+                addressP.innerText = address
+                centerLocationDiv.appendChild(addressP)
+            }
+        );
+      })
     // initial call to get petrol stations of default bounds
     getMapMarkersAroundPosition(map, position)
     // event listeners for when the map changes
@@ -33,7 +51,11 @@ async function initMap(lat, lng) {
 }
 
 navigator.geolocation.getCurrentPosition((position) => {
-  initMap(position.coords.latitude, position.coords.longitude);
+  var lat = position.coords.latitude;
+  var lng = position.coords.longitude;
+  initMap(lat, lng);
+
+  
 });
 
 async function mapMarkers(map) {
