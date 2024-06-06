@@ -38,6 +38,13 @@ async function initMap(lat, lng) {
     mapId: "AUSTRALIA",
   });
 
+  // initial for searching location
+  const searchBtn = document.querySelector('.search_location form')
+  searchBtn.addEventListener('submit', (event) => {
+      event.preventDefault()
+      goToSearchedStation(map)
+    })
+
   // initial spotlight call
   spotlightData = await getSpotlight()
   spotlightLat = spotlightData.lat
@@ -71,7 +78,7 @@ async function initMap(lat, lng) {
     // initial call to get petrol stations of default bounds
     getMapMarkersAroundPosition(map, position)
     // event listeners for when the map changes
-    google.maps.event.addListener(map, 'zoomstart', () => mapMarkers(map))
+    google.maps.event.addListener(map, 'zoom_changed', () => mapMarkers(map))
     google.maps.event.addListener(map, 'dragend', () => mapMarkers(map))
     
 }
@@ -91,8 +98,8 @@ async function mapMarkers(map) {
   }
   // 
 
-  let topLeft = [map.getBounds().Xh.hi,map.getBounds().Hh.lo]
-  let bottomRight = [map.getBounds().Xh.lo,map.getBounds().Hh.hi]
+  let topLeft = [map.getBounds().Xh.hi,map.getBounds().Ih.lo]
+  let bottomRight = [map.getBounds().Xh.lo,map.getBounds().Ih.hi]
 
   fetch(`/api/stations/bounds/${topLeft[0]}/${topLeft[1]}/${bottomRight[0]}/${bottomRight[1]}`)
     .then(res => {
@@ -179,7 +186,7 @@ function goToStation(map,lat,lng) {
     lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
     centerCoords.innerHTML = coord
     singleMapMarker(spotlightData)
-    getMapMarkersAroundPosition(map, {lat: map.getCenter().toJSON().lat,lng:map.getCenter().toJSON().lng})
+    getMapMarkersAroundPosition(map, {lat, lng})
 }
 
 async function singleMapMarker(location) {
@@ -222,4 +229,16 @@ async function singleMapMarker(location) {
         anchor: marker,
         map,
     })
+}
+
+
+function goToSearchedStation(map) {
+  let lat = document.querySelector('.search_location .lat')
+  let lng = document.querySelector('.search_location .lng')
+  lat = Number(lat.value)
+  lng = Number(lng.value)
+  map.setCenter(new google.maps.LatLng(lat,lng))
+  let coord = `lat: ${map.getCenter().toJSON().lat.toFixed(4)} <br />
+  lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
+  centerCoords.innerHTML = coord
 }
