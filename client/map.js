@@ -186,11 +186,7 @@ function goToStation(map,lat,lng) {
     lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
     centerCoords.innerHTML = coord
     singleMapMarker(spotlightData)
-<<<<<<< HEAD
     getMapMarkersAroundPosition(map, {lat, lng})
-=======
-    getMapMarkersAroundPosition(map, {lat: map.getCenter().toJSON().lat,lng:map.getCenter().toJSON().lng})
->>>>>>> c762ebd91e51b9660be5d546bfda273768ca7f23
 }
 
 async function singleMapMarker(location) {
