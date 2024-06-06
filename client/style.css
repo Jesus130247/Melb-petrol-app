@@ -9,8 +9,10 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: linen;
 }
+
+
 
 /* Links */
 a {
@@ -150,6 +152,14 @@ ul img {
 .stats {
   background-color: linen; 
   display: flex;
+  font-size: 1.15rem;
+}
+.stats h1 {
+  align-self: center;
+}
+.stats h2 {
+  padding-left: 5px;
+  font-weight: 300;
 }
 
 .about_left {
@@ -172,8 +182,8 @@ ul img {
 .about {
   background-color: #f7d8e1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  flex-grow: 1;
 }
 
 .about p {
@@ -186,15 +196,17 @@ ul img {
   font-size: 22px;
 }
 
+
 a img {
   height: 60%;
   width: 35%;
 }
 
-/* .about li {
+.about-names {
   display: flex;
-  justify-content: space-evenly;
-} */
+  flex-grow: 1;
+  justify-content: center;
+}
 
 .right-list-name {
   display: inline;
@@ -215,6 +227,10 @@ a img {
   padding-left: 3px;
   border-top: 0;
   background-color: #f7d8e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 .postcode li {
@@ -225,6 +241,11 @@ a img {
   display: inline-block;
   border-radius: 3px;
   cursor: pointer;
+}
+
+.postcode li:hover {
+  background-color: rgb(100, 0, 0);
+  color: whitesmoke;
 }
 
 .display_postcode {
@@ -252,7 +273,8 @@ a img {
   float: right;
   padding-right: 10px;
   padding-top: 0;
-  position: relative;
+  font-size: 1.15rem;
+  font-weight: 400;
 }
 
 .randomStation {
@@ -266,7 +288,7 @@ a img {
 }
 
 .center-coords {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .clock-display {
@@ -287,13 +309,25 @@ a img {
   padding: 0;
 }
 
+.lat-label {
+  margin-right: 3px;
+}
+
 .title {
   background-color: linen; 
   justify-content: center;
   display: flex;
   align-items: center;
+  padding: 0;
 }
 
 .weather-display {
   font-size: 32px;
+}
+
+button {
+  border: 0;
+  color: rgb(35, 95, 224);
+  background-color: #f7d8e1;
+  font-size: 1.15rem;
 }
