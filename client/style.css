@@ -1,26 +1,7 @@
+/* General Resets */
 * {
   box-sizing: border-box;
-}
-a {
-  text-decoration: none;
-  color: black;
-}
-
-h1,h2,h3,h4,h5 {
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    height: 100%;
-}
-
-#map {
-  height: 100%;
-  width: 100%;
-  position: relative;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 html,
@@ -30,6 +11,32 @@ body {
   padding: 0;
 }
 
+/* Links */
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  padding: 0;
+}
+
+/* Containers */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  height: 100vh;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+/* Left Column */
 .left {
   display: flex; 
   flex-direction: column;
@@ -40,76 +47,148 @@ body {
   display: flex; 
   flex-direction: column;
   flex-grow: 1;
-  padding: 10px 0px;
-}
-.left * > * {
-  padding: 5px 0px
+  padding: 10px 0;
+  font-size: 1rem;
 }
 
-.right * > * {
-  padding: 5px 0px
-}
-.right > * {
-  border: 2px solid black;
-  display: flex; 
-  flex-direction: column;
-  flex-grow: 1;
+.left * > * {
+  padding: 5px 0;
 }
 
 .left ul {
   list-style-type: none;
   padding: 0;
 }
+
 .left p {
   border-top: 1px solid black;
   list-style-type: none;
-  padding: 0px 5px;
+  padding: 0 5px;
   display: flex;
   justify-content: space-between; 
 }
+
+/* Right Column */
+.right {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.right > * {
+  border: 2px solid black;
+  display: flex; 
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: flex-start;
+  font-size: 1rem;
+}
+
+.right * > * {
+  padding: 5px 0;
+}
+
 .right ul {
   list-style-type: none;
   padding: 0;
 }
+
 .right-list-owner {
   border-top: 1px solid black;
   list-style-type: none;
-  padding: 5px 0px;
+  padding: 5px 0;
+  display: block;
+  height: 30px;
+  width: 20px;
 }
 
+/* Lists */
 ul img {
   width: 15px;
   border-radius: 10px;
 }
 
+.near-stations-list {
+  background-color: linen;  
+  display: grid;
+}
+
+.near-stations-list p {
+  padding: 0px 20px;
+}
+
+.near-stations-list li {
+  border-top: 1px solid black;
+}
+
+.near-stations-list img {
+  display: inline;
+  float: inline-start;
+}
+
+.near-stations-list h1 {
+  font-size: 2rem;
+}
+
+/* Specific Components */
 .date_temperature {
   cursor: pointer;
   background-color: linen;  
+  justify-content: center;
+  align-items: center;
 }
 
 .stats {
   background-color: linen; 
   display: flex;
 }
-/* .stats > * {
-  justify-content: space-between; 
-} */
 
-.about{
+.about {
   background-color: linen;  
+  display: flex;
+  justify-content: center;
 }
-.near-stations-list{
-  background-color: linen;  
+
+.about p {
+  border-top: none;
+  display: block;
 }
-.spotlight{
-  background-color: #fef1f5;
+
+.about a {
+  padding: 35px 0px;
+  font-size: 22px;
+}
+
+.about img {
+  height: 70%;
+  width: 35%;
+}
+
+.about li {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.right-list-name {
+  display: inline;
+}
+
+.right-list-address {
+  display: block;
+}
+
+.spotlight {
+  background-color: #f7d8e1;
+  display: flex;
+  justify-content: space-between;
 }
 
 .postcode {
-  background-color: #fef1f5 ;
+  background-color: #f7d8e1;
 }
+
 .postcode li {
-  padding: 5px 5px;
+  padding: 5px;
   border: 1px solid gray;
   background-color: floralwhite;
   text-align: center;
@@ -118,32 +197,34 @@ ul img {
   cursor: pointer;
 }
 
+.center-location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: stretch;
+  background-color: #f7d8e1;
+}
+
+/* Miscellaneous */
 .refresh {
-  color:rgb(35, 95, 224);
+  color: rgb(35, 95, 224);
   cursor: pointer;
-}
-/* #leo {
-  background-image: url(https://avatars.githubusercontent.com/u/150982381?v=4);
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-#ting {
-  background-image: url(https://avatars.githubusercontent.com/u/117793395?s=96&v=4);
-  background-size: cover;
-  background-repeat: no-repeat;
-
-}
-#jf {
-  background-image: url(https://avatars.githubusercontent.com/u/76943891?v=4);
-  background-size: cover;
-  background-repeat: no-repeat;
-
+  float: right;
+  padding-right: 10px;
+  padding-top: 0;
+  position: relative;
 }
 
-#alex {
-  background-image: url(https://avatars.githubusercontent.com/u/164013420?v=4);
-  background-size: cover;
-  background-repeat: no-repeat;
+.randomStation {
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+}
 
-} */
+.center-coords {
+  font-size: 2rem;
+}
+
+.clock-display {
+  font-size: 2rem;
+}
