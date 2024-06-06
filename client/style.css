@@ -6,8 +6,10 @@
 
 html,
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
+  background-color: black;
 }
 
 /* Links */
@@ -76,20 +78,17 @@ p {
 .right {
   text-align: center;
   background-color: linen;  
-  /* display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: autos;
-}
+} 
 
 .right > * {
   border: 2px solid black;
   display: flex; 
   flex-direction: column;
-  flex-grow: 0;
-  flex-shrink: 1;
+  flex-grow: 1;
   align-items: flex-start;
   font-size: 1rem;
+  background-color: linen;  
+
 }
 
 .right * > * {
@@ -152,19 +151,29 @@ ul img {
   background-color: linen; 
   display: flex;
 }
-.stats h2 {
-  font-weight: lighter;
+
+.about_left {
+  text-align: center;
+  background-color: #f7d8e1;
+  padding: 0;
+  margin: 0;
 }
-.stats span {
-  font-size: large;
-  margin-top: 25px;
-  max-height: 100px;
+.about_right {
+  text-align: center;
+  background-color: #f7d8e1;
+  padding: 0;
+  margin: 0;
+}
+.about_right h2 {
+  display: flex;
+  align-self: center;
 }
 
 .about {
   background-color: #f7d8e1;
   display: flex;
   justify-content: center;
+  flex-grow: 1;
 }
 
 .about p {
@@ -223,11 +232,6 @@ a img {
   gap: 20px;
 }
 
-.postcode li:hover {
-  background-color: rgb(100, 0, 0);
-  color: whitesmoke;
-}
-
 .center-location {
   display: flex;
   justify-content: center;
@@ -255,8 +259,8 @@ a img {
   display: flex;
   justify-content: center;
   font-size: larger;
-  cursor: pointer;
 }
+
 .randomStation:hover {
   text-decoration: underline;
 }
@@ -274,6 +278,13 @@ a img {
   background-color: #f7d8e1;
   font-size: 1.15rem;
   padding-left: 10px;
+  justify-content: center;
+  display: flex;
+}
+
+.search_location input {
+  margin: 0;
+  padding: 0;
 }
 
 .title {
