@@ -6,7 +6,6 @@
 
 html,
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -73,13 +72,15 @@ h1, h2, h3, h4, h5 {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow-y: autos;
 }
 
 .right > * {
   border: 2px solid black;
   display: flex; 
   flex-direction: column;
-  flex-grow: 1;
+  flex-grow: 0;
+  flex-shrink: 1;
   align-items: flex-start;
   font-size: 1rem;
 }
@@ -142,6 +143,14 @@ ul img {
   background-color: linen; 
   display: flex;
 }
+.stats h2 {
+  font-weight: lighter;
+}
+.stats span {
+  font-size: large;
+  margin-top: 25px;
+  max-height: 100px;
+}
 
 .about {
   background-color: linen;  
@@ -197,6 +206,11 @@ ul img {
   cursor: pointer;
 }
 
+.postcode li:hover {
+  background-color: rgb(100, 0, 0);
+  color: whitesmoke;
+}
+
 .center-location {
   display: flex;
   justify-content: center;
@@ -219,6 +233,10 @@ ul img {
   display: flex;
   justify-content: center;
   font-size: larger;
+  cursor: pointer;
+}
+.randomStation:hover {
+  text-decoration: underline;
 }
 
 .center-coords {
