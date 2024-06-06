@@ -38,7 +38,6 @@ async function initMap(lat, lng) {
     center: position,
     mapId: "AUSTRALIA",
   });
-  
   // initial for searching location
   const searchBtn = document.querySelector('.search_location form')
   searchBtn.addEventListener('submit', (event) => {
