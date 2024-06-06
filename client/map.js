@@ -3,6 +3,7 @@ const centerCoords = document.querySelector('.center-coords')
 const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 const lookupBtn = document.querySelector('.lookup-address-btn')
 const centerLocationDiv = document.querySelector('.center-location')
+const suburbsList = document.querySelector('.suburb-list')
 
 // spotlight code
 import { getSpotlight } from './spotlight.js';
@@ -38,6 +39,7 @@ async function initMap(lat, lng) {
     mapId: "AUSTRALIA",
   });
 
+<<<<<<< HEAD
   // initial for searching location
   const searchBtn = document.querySelector('.search_location form')
   searchBtn.addEventListener('submit', (event) => {
@@ -45,6 +47,19 @@ async function initMap(lat, lng) {
       goToSearchedStation(map)
     })
 
+=======
+  //go a suburb
+  
+  suburbsList.addEventListener('click', async (evt)=>{
+    let coord = await getLatLngBySuburb(evt.target.innerText)
+    console.log('aaaaa', coord);
+    let latSuburb = coord.lat
+    let lngSuburb = coord.lng
+    console.log(latSuburb,lngSuburb);
+    goToStation(map,latSuburb,lngSuburb)
+  })
+  
+>>>>>>> 0e38127 (add feature for going to a selected suburb)
   // initial spotlight call
   spotlightData = await getSpotlight()
   spotlightLat = spotlightData.lat
@@ -242,3 +257,14 @@ function goToSearchedStation(map) {
   lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
   centerCoords.innerHTML = coord
 }
+
+
+async function getLatLngBySuburb(suburb) {
+  let res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${suburb}+Australia,+CA&key=AIzaSyC5yn98ClGzqHKOI80GOoTZYchaWjRXCvc`)
+  let data = await res.json()
+    let centerLat = (data.results[0].geometry.bounds.northeast.lat + data.results[0].geometry.bounds.southwest.lat)/2
+    let centerLng = (data.results[0].geometry.bounds.northeast.lng + data.results[0].geometry.bounds.southwest.lng)/2
+    return {lat:centerLat, lng:centerLng}
+
+}
+

@@ -17,9 +17,11 @@ async function handleSubmit(evt) {
         for (let suburb of data) {
             let name = suburb.name
             let nametagLi = document.createElement('li')
+            nametagLi.className = 'suburb-name-li'
             nametagLi.textContent = name
             suburbList.appendChild(nametagLi)
         }
     })
 
 }
+
