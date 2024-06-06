@@ -53,6 +53,7 @@ h1, h2, h3, h4, h5 {
 
 .left * > * {
   padding: 5px 0;
+  
 }
 
 .left ul {
@@ -70,10 +71,12 @@ h1, h2, h3, h4, h5 {
 
 /* Right Column */
 .right {
-  display: flex;
+  text-align: center;
+  background-color: linen;  
+  /* display: flex;
   flex-direction: column;
-  height: 100%;
-}
+  height: 100%; */
+} 
 
 .right > * {
   border: 2px solid black;
@@ -119,6 +122,7 @@ ul img {
 
 .near-stations-list li {
   border-top: 1px solid black;
+  font-size: 1.15rem;
 }
 
 .near-stations-list img {
@@ -132,6 +136,7 @@ ul img {
 
 /* Specific Components */
 .date_temperature {
+  padding: 10px 0;
   cursor: pointer;
   background-color: linen;  
   justify-content: center;
@@ -143,8 +148,25 @@ ul img {
   display: flex;
 }
 
+.about_left {
+  text-align: center;
+  background-color: #f7d8e1;
+  padding: 0;
+  margin: 0;
+}
+.about_right {
+  text-align: center;
+  background-color: #f7d8e1;
+  padding: 0;
+  margin: 0;
+}
+.about_right h2 {
+  display: flex;
+  align-self: center;
+}
+
 .about {
-  background-color: linen;  
+  background-color: #f7d8e1;
   display: flex;
   justify-content: center;
 }
@@ -159,15 +181,15 @@ ul img {
   font-size: 22px;
 }
 
-.about img {
-  height: 70%;
+a img {
+  height: 60%;
   width: 35%;
 }
 
-.about li {
+/* .about li {
   display: flex;
   justify-content: space-evenly;
-}
+} */
 
 .right-list-name {
   display: inline;
@@ -178,12 +200,15 @@ ul img {
 }
 
 .spotlight {
+  border-bottom: 0;
   background-color: #f7d8e1;
   display: flex;
   justify-content: space-between;
 }
 
 .postcode {
+  padding-left: 3px;
+  border-top: 0;
   background-color: #f7d8e1;
 }
 
@@ -197,12 +222,22 @@ ul img {
   cursor: pointer;
 }
 
+.display_postcode {
+  display: flex;
+  gap: 20px;
+}
+
 .center-location {
   display: flex;
   justify-content: center;
   align-items: center;
-  justify-items: stretch;
+  /* justify-items: stretch; */
   background-color: #f7d8e1;
+  padding-bottom: 5px;
+  border-bottom: 0;
+}
+.center-location h3 {
+  padding-bottom: 0;
 }
 
 /* Miscellaneous */
@@ -227,4 +262,22 @@ ul img {
 
 .clock-display {
   font-size: 2rem;
+}
+
+
+.search_location {
+  border-top: 0;
+  background-color: #f7d8e1;
+  font-size: 1.15rem;
+  padding-left: 10px;
+}
+
+.title {
+  background-color: linen; 
+  display: flex;
+  align-items: center;
+}
+
+.weather-display {
+  font-size: 32px;
 }

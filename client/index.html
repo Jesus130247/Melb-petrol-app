@@ -20,15 +20,18 @@
     
     <div class="container">
         <aside class="left">
+            <div class="title">
+                <h1 style="font-size: 32px;">Petrol down-under</h1>
+            </div>
             <div class="spotlight">
-                <h1 style="text-decoration: underline;">Spotlight
+                <h1 style="text-decoration: underline; margin-left: 10px;">Spotlight Station
                     <span class="refresh">refresh</span>
                 </h1> 
                 <span class="randomStation"></span>
             </div>
             <div class="search_location">
                 <form action="">
-                    <label for="">Search Location by lat/long</label>
+                    <label for=""> OR Search Location by lat/long</label>
                     <br />
                     <label for="">LAT: </label>
                     <input type="text" class="lat">
@@ -39,46 +42,27 @@
                 </form>
             </div>
             <div class="stats">
-                <h1 style="text-decoration: underline;">Stats:</h1>
-                
-                <h1>stats</h1>
-                <!-- <h2>total station: 5244</h2>
-                <h2>total owners: 32</h2>
-                <p>Caltex 1502</p>
-                <p>BP 1230</p>
-                <p>SHELL 839</p> -->
+                <h1 style="text-decoration: underline; margin-left: 10px;">Stats:</h1>
 
             </div>
-            <div class="postcode">
-                <h1>Postcode</h1>
-                <form action="" class="postcode-form">
-                    <input type="text" class="postcode-input">
-                    <button>search</button>
-                </form>
-                <ul class="suburb-list">
-                    <!-- <li></li> -->
-                </ul>
-            </div>
-            <div class="about">
-                <p>TEAM JESUS</p>
-                <ul>
-                    <li id="leo">
-                        <img src="https://avatars.githubusercontent.com/u/150982381?v=4" alt="">
-                        <a href="https://github.com/Jesus130247">Leo</a>
-                    </li>
-                    <li id="ting">
-                        <img src="https://avatars.githubusercontent.com/u/117793395?s=96&v=4" alt="">
-                        <a href="https://github.com/LiPuSure">Ting</a>
-                    </li>
-                    <li id="jf">
-                        <img src="https://avatars.githubusercontent.com/u/76943891?v=4" alt="">
-                        <a href="https://github.com/CobaltDingus">JF</a>
-                    </li>
-                    <li id="alex">
-                        <img src="https://avatars.githubusercontent.com/u/164013420?v=4" alt="">
-                        <a href="https://github.com/shandakei">Alex</a>
-                    </li>
-                </ul>
+            <div class="about_left">
+                <h2>TEAM JESUS</h2>
+                <div class="about">
+                    <ul>
+                        <li id="jf">
+                            <a href="https://github.com/CobaltDingus">
+                                <img src="https://avatars.githubusercontent.com/u/76943891?v=4" alt="">
+                                JF
+                            </a>
+                        </li>
+                        <li id="alex">
+                            <a href="https://github.com/shandakei">
+                                <img src="https://avatars.githubusercontent.com/u/164013420?v=4" alt="">
+                                Alex
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </aside>
         <main class="map">
@@ -92,8 +76,22 @@
                 <span class="center-coords"></span>
                 <button class="lookup-address-btn">Lookup address</button>
             </div>
+            <div class="postcode">
+                <div class="display_postcode">
+                    <div class="cont">
+                        <h1> Search Postcode</h1>
+                        <form action="" class="postcode-form">
+                            <input type="text" class="postcode-input">
+                            <button>search</button>
+                        </form>
+                    </div>
+                    <ul class="suburb-list">
+                        <!-- <li></li> -->
+                    </ul>
+                </div>
+            </div>
             <section class="near-stations-list">
-                <h1>Nearest</h1>
+                <h1>Nearest Stations</h1>
                 <ul>
                     <!-- <li>
                         <p>name</p>
@@ -102,6 +100,25 @@
                     </li> -->
                 </ul>
             </section>
+            <div class="about_right">
+                <h2>TEAM JESUS</h2>
+                <div class="about">
+                    <ul>
+                        <li id="leo">
+                            <a href="https://github.com/Jesus130247">
+                                <img src="https://avatars.githubusercontent.com/u/150982381?v=4" alt="">
+                                Leo
+                            </a>
+                        </li>
+                        <li id="ting">
+                            <a href="https://github.com/LiPuSure">
+                                <img src="https://avatars.githubusercontent.com/u/117793395?s=96&v=4" alt="">
+                                Ting
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>   
         </aside>
     </div>
     <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
