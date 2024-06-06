@@ -5,12 +5,10 @@ dateTempDiv.addEventListener('click', handleClick)
 
 displayClock()
 const clockClass = document.querySelector('.clock-display')
-console.log(clockClass);
 
 let weatherDisplay = document.createElement('h2')
 weatherDisplay.className = "weather-display"
 weatherDisplay.style.display = 'none'
-console.log(weatherDisplay.className);
 
 displayWeather()
 
