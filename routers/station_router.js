@@ -59,6 +59,12 @@ router.get('/api/stations/nearest/:lat/:lng', (req, res) => {
     .catch(err => res.status(404).json(err))
 })
 
+router.get('/api/stations/nearest/:lat/:lng/:radius', (req, res) => {
+    Station.findStationsAroundPosition({lat:req.params.lat, lng:req.params.lng}, Number(req.params.radius))
+    .then(result => res.status(200).json(result))
+    .catch(err => res.status(404).json(err))
+})
+
 module.exports = router 
 
 
