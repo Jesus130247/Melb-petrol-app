@@ -30,6 +30,10 @@ h1, h2, h3, h4, h5 {
   height: 100vh;
 }
 
+p {
+  margin: 0;
+}
+
 #map {
   height: 100%;
   width: 100%;
@@ -264,7 +268,6 @@ a img {
   font-size: 2rem;
 }
 
-
 .search_location {
   border-top: 0;
   background-color: #f7d8e1;
@@ -274,6 +277,7 @@ a img {
 
 .title {
   background-color: linen; 
+  justify-content: center;
   display: flex;
   align-items: center;
 }
