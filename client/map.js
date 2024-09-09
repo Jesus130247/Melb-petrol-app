@@ -39,7 +39,6 @@ async function initMap(lat, lng) {
     mapId: "AUSTRALIA",
   });
 
-<<<<<<< HEAD
   // initial for searching location
   const searchBtn = document.querySelector('.search_location form')
   searchBtn.addEventListener('submit', (event) => {
@@ -47,19 +46,17 @@ async function initMap(lat, lng) {
       goToSearchedStation(map)
     })
 
-=======
   //go a suburb
   
   suburbsList.addEventListener('click', async (evt)=>{
     let coord = await getLatLngBySuburb(evt.target.innerText)
-    console.log('aaaaa', coord);
+    console.log(coord);
     let latSuburb = coord.lat
     let lngSuburb = coord.lng
     console.log(latSuburb,lngSuburb);
     goToStation(map,latSuburb,lngSuburb)
   })
   
->>>>>>> 0e38127 (add feature for going to a selected suburb)
   // initial spotlight call
   spotlightData = await getSpotlight()
   spotlightLat = spotlightData.lat
@@ -159,7 +156,7 @@ function getMapMarkersAroundPosition(map, position) {
   fetch(`/api/stations/nearest/${position.lat}/${position.lng}`)
   .then(res => res.json())
   .then(res => {
-    console.log('around',res)
+    console.log('Map Marker Data: ',res)
     for (let location of res) {
       let iconImg = document.createElement('img')
       iconImg.classList.add('station_marker')
