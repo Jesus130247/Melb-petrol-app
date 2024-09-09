@@ -58,6 +58,9 @@ async function initMap(lat, lng) {
   
   suburbsList.addEventListener('click', async (evt)=>{
     let coord = await getLatLngBySuburb(evt.target.innerText)
+
+    console.log(coord);
+
     let latSuburb = coord.lat
     let lngSuburb = coord.lng
     goToCoords(map,latSuburb,lngSuburb)
@@ -112,8 +115,18 @@ function updateCenterCoords() {
     centerCoords.innerHTML = coord
 }
 
+
+function getMapMarkersAroundPosition(map, position) {
+  fetch(`/api/stations/nearest/${position.lat}/${position.lng}`)
+  .then(res => res.json())
+  .then(res => {
+    console.log('Map Marker Data: ',res)
+    for (let location of res) {
+      let iconImg = document.createElement('img')
+
 function makeMarker(location) {
     let iconImg = document.createElement('img')
+
       iconImg.classList.add('station_marker')
       iconImg.src = findIconUrl(location.brand_name)
       iconImg.style.width = '40px'
