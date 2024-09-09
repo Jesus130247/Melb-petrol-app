@@ -6,17 +6,13 @@ dateTempDiv.addEventListener('click', handleClick)
 displayClock()
 const clockClass = document.querySelector('.clock-display')
 
-
 let weatherDisplay = document.createElement('h2')
 weatherDisplay.className = "weather-display"
 weatherDisplay.style.display = 'none'
 
-
 displayWeather()
 
 function handleClick(event) {
-    console.log(event.target.classList.value, 'date-temp EL');
-
     let className = event.target.classList.value
 
 

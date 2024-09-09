@@ -281,10 +281,12 @@ a img {
   display: flex;
   justify-content: center;
   font-size: larger;
+  color: rgb(35, 95, 224);
 }
 
 .randomStation:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .center-coords {
@@ -330,4 +332,5 @@ button {
   color: rgb(35, 95, 224);
   background-color: #f7d8e1;
   font-size: 1.15rem;
+  cursor: pointer;
 }
