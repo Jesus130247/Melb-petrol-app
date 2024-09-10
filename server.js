@@ -10,6 +10,10 @@ app.use(express.static('client'))
 
 app.use(express.json())
 
+app.get('/api/maps-key', (req, res) => {
+    res.json({ apiKey: process.env.MAP_API_KEY });
+  });
+
 app.get('/test', (req, res) => {
     res.send('Melbourne Petrol App')
 })
