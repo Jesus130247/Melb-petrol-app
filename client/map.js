@@ -38,7 +38,6 @@ async function initMap(lat, lng) {
     center: position,
     mapId: "AUSTRALIA",
   });
-  
   // initial for searching location
   const searchBtn = document.querySelector('.search_location form')
   searchBtn.addEventListener('submit', (event) => {
@@ -50,10 +49,10 @@ async function initMap(lat, lng) {
   
   suburbsList.addEventListener('click', async (evt)=>{
     let coord = await getLatLngBySuburb(evt.target.innerText)
-    console.log('aaaaa', coord);
+    // console.log('aaaaa', coord);
     let latSuburb = coord.lat
     let lngSuburb = coord.lng
-    console.log(latSuburb,lngSuburb);
+    // console.log(latSuburb,lngSuburb);
     goToStation(map,latSuburb,lngSuburb)
   })
   
@@ -165,7 +164,7 @@ function getMapMarkersAroundPosition(map, position) {
   fetch(`/api/stations/nearest/${position.lat}/${position.lng}`)
   .then(res => res.json())
   .then(res => {
-    console.log('around',res)
+    // console.log('around',res)
     for (let location of res) {
       let iconImg = document.createElement('img')
       iconImg.classList.add('station_marker')
@@ -264,9 +263,16 @@ function goToSearchedStation(map) {
   centerCoords.innerHTML = coord
 }
 
+let apiKey
+fetch('/api/maps-key')
+  .then(response => response.json())
+  .then(data => {
+    apiKey = data.apiKey
+  })
+.catch(error => console.error('Error fetching API key:', error));
 
 async function getLatLngBySuburb(suburb) {
-  let res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${suburb}+Australia,+CA&key=AIzaSyC5yn98ClGzqHKOI80GOoTZYchaWjRXCvc`)
+  let res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${suburb}+Australia,+CA&key=${apiKey}`)
   let data = await res.json()
     let centerLat = (data.results[0].geometry.bounds.northeast.lat + data.results[0].geometry.bounds.southwest.lat)/2
     let centerLng = (data.results[0].geometry.bounds.northeast.lng + data.results[0].geometry.bounds.southwest.lng)/2
