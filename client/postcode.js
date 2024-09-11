@@ -7,7 +7,7 @@ formPostcode.addEventListener('submit', handleSubmit)
 
 async function handleSubmit(evt) {
     evt.preventDefault()
-
+    // console.log(evt) // when selected 'search'
     let postcode = inputPostcode.value
     suburbList.innerHTML = ""
     // make endpoint to send a postcode  then make a call to the suburb api
