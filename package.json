@@ -15,6 +15,7 @@
     "dotenv": "^16.4.5",
     "env": "^0.0.2",
     "express": "^4.19.2",
+    "gh-pages": "^6.1.1",
     "pg": "^8.11.5"
   },
   "devDependencies": {

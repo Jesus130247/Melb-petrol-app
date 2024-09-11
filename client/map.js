@@ -201,11 +201,12 @@ function getMapMarkersAroundPosition(map, position) {
 }
 
 function goToStation(map,lat,lng) {
+  // console.log(lat, lng)
     map.setCenter(new google.maps.LatLng(lat,lng))
     let coord = `lat: ${map.getCenter().toJSON().lat.toFixed(4)} <br />
     lng: ${map.getCenter().toJSON().lng.toFixed(4)}`
     centerCoords.innerHTML = coord
-    singleMapMarker(spotlightData)
+    // singleMapMarker(spotlightData)
     getMapMarkersAroundPosition(map, {lat, lng})
 }
 
@@ -272,6 +273,7 @@ fetch('/api/maps-key')
 .catch(error => console.error('Error fetching API key:', error));
 
 async function getLatLngBySuburb(suburb) {
+  // console.log(suburb)
   let res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${suburb}+Australia,+CA&key=${apiKey}`)
   let data = await res.json()
     let centerLat = (data.results[0].geometry.bounds.northeast.lat + data.results[0].geometry.bounds.southwest.lat)/2
